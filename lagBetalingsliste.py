@@ -3,7 +3,7 @@ import pandas as pd
 from Betalinger_class import Betaling
 
 def lagListeAvBetalinger(filnavn):
-    mappe = "C://Users//Peder//Documents//NTNU//Økonomi"
+    mappe = "C://Users//Peder//OneDrive - NTNU//Dokumenter//Områder//Økonomi//Program//Økonomi"
     betalinger = pd.read_excel(mappe + "//" + filnavn)
 
     betalinger = betalinger.sort_values(['Dato'], ascending=True)

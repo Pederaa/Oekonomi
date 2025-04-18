@@ -1,0 +1,2 @@
+def sorterBetalingerEtterType():
+    pass

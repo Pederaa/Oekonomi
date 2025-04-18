@@ -1,7 +1,7 @@
-def sorterEtterAarmanneder(betalings_liste):
+def sorterEtterAarmanneder(betalinger):
     maaneder_dict = {} #dict(zip_longest(maaneder_liste, [], fillvalue=[]))
 
-    for betaling in betalings_liste:
+    for betaling in betalinger.list:
         betelings_maaned = str(betaling.month) + " " + str(betaling.year)
 
         if not betelings_maaned in maaneder_dict:

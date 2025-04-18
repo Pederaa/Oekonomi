@@ -1,14 +1,15 @@
 from kategoriidentifiserer import identifiserKategori
+from Betalinger_class import *
 
-def sorterBetalingerEtterKategori(betalingsListe):
+def sorterBetalingerEtterKategori(betalinger):
     sortertEtterKategori = {}
 
-    for betaling in betalingsListe:
+    for betaling in betalinger.list:
         kategori = identifiserKategori(betaling.forklaring)
 
         try:
            sortertEtterKategori[kategori].append(betaling)
         except:
-            sortertEtterKategori[kategori] = []
+            sortertEtterKategori[kategori] = Betalinger()
     
     return sortertEtterKategori

@@ -4,7 +4,7 @@ from Betalinger_class import *
 def sorterBetalingerEtterKategori(betalinger):
     sortertEtterKategori = {}
 
-    for betaling in betalinger.list:
+    for betaling in betalinger:
         kategori = identifiserKategori(betaling.forklaring)
 
         try:

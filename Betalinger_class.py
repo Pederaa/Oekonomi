@@ -1,8 +1,9 @@
 import numpy as np
+from numpy import ndarray
 
 måneder = ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"]
 
-class Betaling:
+class Betaling():
     def __init__(self, datestamp, forklaring, utFraKonto, innPaaKonto):
         self.dato = datestamp.day
         self.month = måneder[datestamp.month-1]
@@ -26,28 +27,25 @@ class Betaling:
         return row
 
 
-class Betalinger:
+class Betalinger(list):
     def __init__(self):
-        self.list = []
-
-    def append(self, betaling):
-        self.list.append(betaling)
+        pass
     
     def sum(self):
         innskudd = 0
         utgift = 0
-        for betaling in self.list:
+        for betaling in self:
             innskudd += betaling.innPaaKonto
             utgift += betaling.utFraKonto
         
         return utgift, innskudd
 
     def lagNpArray(self):
-        sheet = np.empty((len(self.list)+1, 4), dtype=object)
+        sheet = np.empty((len(self)+1, 4), dtype=object)
         total = [0, 0]
 
-        for i in range(len(self.list)):
-            betaling = self.list[i]
+        for i in range(len(self)):
+            betaling = self[i]
 
             r = betaling.tonpArray()
             sheet[i][0] = r[0]
@@ -57,7 +55,6 @@ class Betalinger:
 
             total[0] += betaling.utFraKonto
             total[1] += betaling.innPaaKonto
-
     
         sheet[-1][1] = "Total:"
         sheet[-1][2] = total[0]

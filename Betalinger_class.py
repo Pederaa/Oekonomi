@@ -1,5 +1,10 @@
 import numpy as np
-from numpy import ndarray
+import pandas as pd
+from datetime import datetime as dt
+from itertools import zip_longest
+import os
+import xlsxwriter
+#from xlsxwriter.utility import xl_rowcol_to_cell
 
 måneder = ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"]
 
@@ -40,7 +45,7 @@ class Betalinger(list):
         
         return utgift, innskudd
 
-    def lagNpArray(self):
+    def lagSheet(self):
         sheet = np.empty((len(self)+1, 4), dtype=object)
         total = [0, 0]
 
@@ -61,3 +66,25 @@ class Betalinger(list):
         sheet[-1][3] = total[1]
     
         return sheet
+    
+    def toExcel(self, filname, sheet, **kwargs):
+        try:
+            sheet_name = kwargs["sheet_name"]
+        except:
+            sheet_name = "Ark 1"
+
+        with pd.ExcelWriter(filname, engine="xlsxwriter") as writer:
+            to_write = pd.DataFrame(sheet, columns=["År", "Måned", "Ut", "Inn"])
+            to_write.to_excel(writer, sheet_name=sheet_name)
+
+            worksheet = writer.sheets[sheet_name]
+            # worksheet.set_zoom(90)
+
+            workbook = writer.book
+            money_fmt = workbook.add_format({'num_format': '#,##0.00'})
+            bold_fmt = workbook.add_format({'bold': True, 'num_format': '#,##0.00'})
+
+            worksheet.set_column('A:B', 8)      # Indeks og årstall
+            worksheet.set_column('C:C', 15)     # Måned
+            worksheet.set_column('D:E', 15, money_fmt)  # /Inn/ut
+            worksheet.set_row(len(sheet), 21, bold_fmt)  # Total-rad

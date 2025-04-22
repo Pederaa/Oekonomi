@@ -22,19 +22,30 @@ class Betaling():
 
         self.kategorier = []
     
-    def tonpArray(self):
-        row = np.empty(4, dtype=object)
-        row[0] = str(self.dato) + ". " + str(self.month)
-        row[1] = self.forklaring
-        row[2] = self.utFraKonto
-        row[3] = self.innPaaKonto
-
+    def tonpArray(self, columns):
+        row = np.empty(len(columns), dtype=object)
+        for j in range(len(columns)):
+            match columns[j]:
+                case "Dato":
+                    row[j] = str(self.dato) + ". " + str(self.month)
+                case "År":
+                    row[j] = self.year
+                case "Måned":
+                    row[j] = str(self.month)
+                case "Forklaring":
+                    row[j] = self.forklaring
+                case "Ut":
+                    row[j] = self.utFraKonto
+                case "Inn":
+                    row[j] = self.innPaaKonto
+                case _:
+                    raise Exception("Ukjent kolonne")
         return row
 
 
 class Betalinger(list):
     def __init__(self):
-        pass
+        self.columns = ["År", "Måned", "Ut", "Inn"]
     
     def sum(self):
         innskudd = 0
@@ -52,7 +63,7 @@ class Betalinger(list):
         for i in range(len(self)):
             betaling = self[i]
 
-            r = betaling.tonpArray()
+            r = betaling.tonpArray(self.columns)
             sheet[i][0] = r[0]
             sheet[i][1] = r[1]
             sheet[i][2] = r[2]
@@ -74,7 +85,7 @@ class Betalinger(list):
             sheet_name = "Ark 1"
 
         with pd.ExcelWriter(filname, engine="xlsxwriter") as writer:
-            to_write = pd.DataFrame(sheet, columns=["År", "Måned", "Ut", "Inn"])
+            to_write = pd.DataFrame(sheet, columns=self.columns)
             to_write.to_excel(writer, sheet_name=sheet_name)
 
             worksheet = writer.sheets[sheet_name]

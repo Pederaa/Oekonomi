@@ -23,5 +23,4 @@ betalinger = slaaSammenDager(betalinger)
 mappe = "Betalinger"
 utskriftsfil = "Test.xlsx"
 
-g = betalinger.lagSheet()
-betalinger.toExcel(utskriftsfil, g, sheet_name="Nytt ark")
+betalinger.toExcel(utskriftsfil, sheet_name="Nytt ark")

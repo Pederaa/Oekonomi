@@ -78,7 +78,8 @@ class Betalinger(list):
     
         return sheet
     
-    def toExcel(self, filname, sheet, **kwargs):
+    def toExcel(self, filname, **kwargs):
+        sheet = self.lagSheet()
         try:
             sheet_name = kwargs["sheet_name"]
         except:

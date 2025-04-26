@@ -2,9 +2,6 @@ import numpy as np
 import pandas as pd
 from datetime import datetime as dt
 from itertools import zip_longest
-import os
-import xlsxwriter
-#from xlsxwriter.utility import xl_rowcol_to_cell
 
 måneder = ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"]
 
@@ -57,25 +54,24 @@ class Betalinger(list):
         return utgift, innskudd
 
     def lagSheet(self):
-        sheet = np.empty((len(self)+1, 4), dtype=object)
+        sheet = np.empty((len(self)+1, len(self.columns)), dtype=object)
         total = [0, 0]
 
         for i in range(len(self)):
             betaling = self[i]
 
             r = betaling.tonpArray(self.columns)
-            sheet[i][0] = r[0]
-            sheet[i][1] = r[1]
-            sheet[i][2] = r[2]
-            sheet[i][3] = r[3]
+            for j in range(len(self.columns)):
+                sheet[i][j] = r[j]
 
             total[0] += betaling.utFraKonto
             total[1] += betaling.innPaaKonto
     
-        sheet[-1][1] = "Total:"
-        sheet[-1][2] = total[0]
-        sheet[-1][3] = total[1]
-    
+        for i in range(len(self.columns)):
+            if(self.columns[i] == "Ut"):
+                sheet[-1][i] = total[0]
+            elif self.columns[i] == "Inn":
+                sheet[-1][i] = total[1]    
         return sheet
     
     def toExcel(self, filname, **kwargs):

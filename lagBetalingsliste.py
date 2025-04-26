@@ -7,8 +7,8 @@ def lagListeAvBetalinger(filnavn):
     betalinger = pd.read_excel(mappe + "//" + filnavn)
 
     betalinger = betalinger.sort_values(['Dato'], ascending=True)
-    betalinger["Inn på konto"].fillna(0, inplace=True)
-    betalinger["Ut fra konto"].fillna(0, inplace=True)
+    #betalinger["Inn på konto"] = betalinger["Inn på konto"].fillna(0, inplace=True)
+    #betalinger["Ut fra konto"] = betalinger["Ut fra konto"].fillna(0, inplace=True)
 
     np_data = betalinger.to_numpy()
     np_data = np.delete(np_data, 2, 1)

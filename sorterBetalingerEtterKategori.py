@@ -13,3 +13,13 @@ def sorterBetalingerEtterKategori(betalinger):
             sortertEtterKategori[kategori] = Betalinger()
     
     return sortertEtterKategori
+
+
+def fjernKategori(betalinger, kategorierAaFjerne):
+    ny_betalingsListe = Betalinger()
+    for betaling in betalinger:
+        betalingensKategori = identifiserKategori(betaling.forklaring)
+        if betalingensKategori not in kategorierAaFjerne :
+            ny_betalingsListe.append(betaling)
+    
+    return ny_betalingsListe

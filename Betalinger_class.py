@@ -35,8 +35,12 @@ class Betaling():
                     row[j] = self.utFraKonto
                 case "Inn":
                     row[j] = self.innPaaKonto
+                case "Uke":
+                    row[j] = self.datestamp.week
+                case "datestamp":
+                    row[j] = self.datestamp
                 case _:
-                    raise Exception("Ukjent kolonne")
+                    raise Exception("Ukjent kolonne") 
         return row
 
 
@@ -54,24 +58,14 @@ class Betalinger(list):
         return utgift, innskudd
 
     def lagSheet(self):
-        sheet = np.empty((len(self)+1, len(self.columns)), dtype=object)
-        total = [0, 0]
+        sheet = np.empty((len(self), len(self.columns)), dtype=object)
 
         for i in range(len(self)):
             betaling = self[i]
 
             r = betaling.tonpArray(self.columns)
             for j in range(len(self.columns)):
-                sheet[i][j] = r[j]
-
-            total[0] += betaling.utFraKonto
-            total[1] += betaling.innPaaKonto
-    
-        for i in range(len(self.columns)):
-            if(self.columns[i] == "Ut"):
-                sheet[-1][i] = total[0]
-            elif self.columns[i] == "Inn":
-                sheet[-1][i] = total[1]    
+                sheet[i][j] = r[j]   
         return sheet
     
     def toExcel(self, filname, **kwargs):
@@ -95,4 +89,12 @@ class Betalinger(list):
             worksheet.set_column('A:B', 8)      # Indeks og årstall
             worksheet.set_column('C:C', 15)     # Måned
             worksheet.set_column('D:E', 15, money_fmt)  # /Inn/ut
-            worksheet.set_row(len(sheet), 21, bold_fmt)  # Total-rad
+
+            # Totalen
+            worksheet.write(len(sheet)+1, 3, '=SUM(D2:D' + str(len(sheet)-1) + str(")"))
+            worksheet.write(len(sheet)+1, 4, '=SUM(E2:E' + str(len(sheet)-1) + str(")"))
+            worksheet.set_row(len(sheet)+1, 21, bold_fmt)  # Total-rad
+
+            # Utgifter
+            worksheet.write(0, 6, 0)
+            worksheet.write('F2:F' + str(len(sheet)), "=")

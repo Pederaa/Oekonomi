@@ -19,16 +19,17 @@ kategorier = {
                    "Leger Uten Grenser"
                    "Buckaroo",
                    "Chess.com",
-                   "Sit Efaktura",
                    "Aftenposten",
                    "Vipps:changemaker",
                    "Tekna",
                    "Brilliant.org",
                    "Buckaroo",
-                   "Studentsamskipnaden",
                    "If Skadeforsikring",
                    "astral Coach",
                    "astralcoach"],
+    
+    "Leie": ["Studentsamskipnaden",
+            "Sit Efaktura"],
 
     "Donasjoner": ["Leger Uten Grenser",
                    "Vipps:roede",
@@ -81,8 +82,10 @@ kategorier = {
               "Gave"],
             
     "Skole": ["Norges Tekn.naturvitensk.unive",
-              "skap", "Skap",
-              "Fysikk-bøker", "Mattebøker"],
+              "skap", 
+              "Skap",
+              "Fysikk-bøker", 
+              "Mattebøker"],
 
     "Ikke relevant": ["Kontoregulering"],
 

@@ -10,6 +10,7 @@ class Betaling():
         self.dato = datestamp.day
         self.month = måneder[datestamp.month-1]
         self.year = datestamp.year
+        self.gooning = 2
 
         self.datestamp = datestamp
 

@@ -25,7 +25,7 @@ class Betaling():
         for j in range(len(columns)):
             match columns[j]:
                 case "Dato":
-                    row[j] = str(self.dato) + ". " + str(self.month)
+                    row[j] = str(self.dato) + ". " + str(self.month) + " " + str(self.year)
                 case "År":
                     row[j] = self.year
                 case "Måned":

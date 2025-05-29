@@ -25,8 +25,8 @@ betalinger = slaaSammenUker(betalinger)
 # Sorterer betalingene i en dict hvor nøkkelen er etter hvilken kategori den tilhører
 # betalingerSortertKatagori = sorterBetalingerEtterKategori(betalinger)
 
-mappe = "Betalinger"
-utskriftsfil = "Test.xlsx"
+utskriftsmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//NTNU//Økonomi//Output"
+utskriftsfil = "Output.xlsx"
 
-betalinger.columns = ["År", "datestamp", "Ut", "Inn"]
-betalinger.toExcel(utskriftsfil, sheet_name="Nytt ark")
+betalinger.columns = ["År", "Dato", "Ut", "Inn"]
+betalinger.toExcel(utskriftsmappe + "//" + utskriftsfil, sheet_name="Nytt ark")

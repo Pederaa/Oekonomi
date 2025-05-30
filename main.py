@@ -7,14 +7,16 @@ from sorterEtterMånder import sorterEtterAarmanneder
 from sorterBetalingerEtterKategori import sorterBetalingerEtterKategori, fjernKategori
 from slaaSammen import slaaSammenDager, slaaSammenUker
 
-filnavn = "okt23_nov24.xlsx"
-print("Hello world")
+inputmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//NTNU//Økonomi//Betalinger"
 
 # Ordner betalingene (egen class) i en egen liste fra exel-dokumentet
-betalinger = lagListeAvBetalinger(filnavn) 
+betalinger = lagListeAvBetalinger(inputmappe) 
+
+#for betaling in betalinger:
+    #print(betaling.datestamp)
 
 # Fjerner kategorier jeg ikke vil ha med
-betalinger = fjernKategori(betalinger, ["Ikke relevant", "Lønn", "Leie"])
+#betalinger = fjernKategori(betalinger, ["Ikke relevant", "Lønn", "Leie"])
 
 # Slå sammen uker i en betaling 
 betalinger = slaaSammenUker(betalinger)
@@ -28,5 +30,5 @@ betalinger = slaaSammenUker(betalinger)
 utskriftsmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//NTNU//Økonomi//Output"
 utskriftsfil = "Output.xlsx"
 
-betalinger.columns = ["År", "Dato", "Ut", "Inn"]
+betalinger.columns = ["År", "Uke", "Ut", "Inn"]
 betalinger.toExcel(utskriftsmappe + "//" + utskriftsfil, sheet_name="Nytt ark")

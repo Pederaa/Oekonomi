@@ -1,21 +1,27 @@
 import numpy as np
 import pandas as pd
+import os
 from Betalinger_class import *
 
-def lagListeAvBetalinger(filnavn):
-    mappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//NTNU//Økonomi//Betalinger"
-    betalinger = pd.read_excel(mappe + "//" + filnavn)
+def lagListeAvBetalinger(foldernavn):
 
-    betalinger = betalinger.sort_values(['Dato'], ascending=True)
-    betalinger["Inn på konto"].fillna(0, inplace=True)
-    betalinger["Ut fra konto"].fillna(0, inplace=True)
+    kombinertListeAvBetalinger = Betalinger()
+    for filename in os.listdir(foldernavn):
+        if filename.endswith('.xlsx') or filename.endswith('.xls'):
+            filename = os.path.join(foldernavn, filename)
+            betalinger = pd.read_excel(filename)
 
-    np_data = betalinger.to_numpy()
-    np_data = np.delete(np_data, 2, 1)
+            betalinger["Inn på konto"].fillna(0, inplace=True)
+            betalinger["Ut fra konto"].fillna(0, inplace=True)
 
-    betalinger = Betalinger()
-    for i in range(0, len(np_data)): # Sorterer betalingen etter måned år.
-        new_betaling = Betaling(np_data[i][0], np_data[i][1], np_data[i][2], np_data[i][3])
-        betalinger.append(new_betaling)
+            np_data = betalinger.to_numpy()
+            np_data = np.delete(np_data, 2, 1)
 
-    return betalinger
+        for i in range(0, len(np_data)): # Sorterer betalingen etter måned år.
+            new_betaling = Betaling(np_data[i][0], np_data[i][1], np_data[i][2], np_data[i][3])
+            kombinertListeAvBetalinger.append(new_betaling)
+
+    kombinertListeAvBetalinger = Betalinger(set(kombinertListeAvBetalinger))
+    kombinertListeAvBetalinger.sortByDatestamp()
+
+    return kombinertListeAvBetalinger

@@ -20,6 +20,12 @@ class Betaling():
 
         self.kategorier = []
     
+    def __eq__(self, other):
+        return self.datestamp == other.datestamp and self.forklaring == other.forklaring and self.utFraKonto == other.utFraKonto and self.innPaaKonto == other.innPaaKonto
+
+    def __hash__(self):
+        return hash((self.datestamp, self.forklaring, self.utFraKonto, self.innPaaKonto))
+    
     def tonpArray(self, columns):
         row = np.empty(len(columns), dtype=object)
         for j in range(len(columns)):
@@ -46,7 +52,11 @@ class Betaling():
 
 
 class Betalinger(list):
-    def __init__(self):
+    def __init__(self, items=None):
+        if items is None:
+            items = []
+        super().__init__(items)
+        
         self.columns = ["År", "Måned", "Ut", "Inn"]
     
     def sum(self):
@@ -57,6 +67,9 @@ class Betalinger(list):
             utgift += betaling.utFraKonto
         
         return utgift, innskudd
+    
+    def sortByDatestamp(self):
+        self.sort(key=lambda obj: obj.datestamp)
 
     def lagSheet(self):
         sheet = np.empty((len(self), len(self.columns)), dtype=object)

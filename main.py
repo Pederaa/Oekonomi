@@ -6,11 +6,12 @@ from lagBetalingsliste import lagListeAvBetalinger
 from sorterEtterMånder import sorterEtterAarmanneder
 from sorterBetalingerEtterKategori import sorterBetalingerEtterKategori, fjernKategori
 from slaaSammen import slaaSammenDager, slaaSammenUker
+from exceldokument import excelDokument
 
 inputmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//NTNU//Økonomi//Betalinger"
 
 # Ordner betalingene (egen class) i en egen liste fra exel-dokumentet
-betalinger = lagListeAvBetalinger(inputmappe) 
+betalinger = lagListeAvBetalinger(inputmappe)
 
 #for betaling in betalinger:
     #print(betaling.datestamp)
@@ -28,7 +29,7 @@ betalinger = slaaSammenUker(betalinger)
 # betalingerSortertKatagori = sorterBetalingerEtterKategori(betalinger)
 
 utskriftsmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//NTNU//Økonomi//Output"
-utskriftsfil = "Output.xlsx"
 
-betalinger.columns = ["År", "Uke", "Ut", "Inn"]
-betalinger.toExcel(utskriftsmappe + "//" + utskriftsfil, sheet_name="Nytt ark")
+dok = excelDokument(betalinger)
+dok.columns = ["År", "Uke", "Ut", "Inn"]
+dok.make("Output.xlsx", utskriftsmappe)

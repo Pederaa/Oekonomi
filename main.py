@@ -59,7 +59,7 @@ for betaling in nye_betalinger:
 fig, ax = plt.subplots(figsize=(12, 12))
 ax.plot(x, y)
 
-date_form = DateFormatter("%m-%d")
+date_form = DateFormatter("%d.%m")
 ax.xaxis.set_major_formatter(date_form)
 
 plt.show()

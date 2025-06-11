@@ -105,10 +105,8 @@ def identifiserKategori(forklaring):
         for nøkkelord in kategorier[kategori]:
             if type(forklaring) != type("d"):
                 break
-            
+
             if nøkkelord.lower() in forklaring.lower():
-                if kategori == "Leie":
-                    print("Found ")
                 return kategori
 
     return "Annet"

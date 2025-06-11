@@ -29,7 +29,8 @@ kategorier = {
                    "astralcoach"],
     
     "Leie": ["Studentsamskipnaden",
-            "Sit Efaktura"],
+            "Sit Efaktura",
+            "Sit"],
 
     "Donasjoner": ["Leger Uten Grenser",
                    "Vipps:roede",
@@ -55,7 +56,8 @@ kategorier = {
               "Norwegian Air Shuttle"],
 
     "Lønn": ["Lønn",
-             "Statens Lånekasse"],
+             "Statens Lånekasse",
+             "Lånekassa"],
             
     "Fritidsinteresser": ["Ntnui Sjakk",
                           "Steamgames.com",
@@ -87,7 +89,9 @@ kategorier = {
               "Fysikk-bøker", 
               "Mattebøker"],
 
-    "Ikke relevant": ["Kontoregulering"],
+    "Ikke relevant": ["Kontoregulering",
+                      "Kontoregulering",
+                      "Overføring Mellom Egne Konti"],
 
     "Alkohol": ["Den gode nabo",
                 "Vinmonopolet"],
@@ -103,6 +107,8 @@ def identifiserKategori(forklaring):
                 break
             
             if nøkkelord.lower() in forklaring.lower():
+                if kategori == "Leie":
+                    print("Found ")
                 return kategori
-    
+
     return "Annet"

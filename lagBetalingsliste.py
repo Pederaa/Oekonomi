@@ -11,8 +11,8 @@ def lagListeAvBetalinger(foldernavn):
             filename = os.path.join(foldernavn, filename)
             betalinger = pd.read_excel(filename)
 
-            betalinger["Inn på konto"].fillna(0, inplace=True)
-            betalinger["Ut fra konto"].fillna(0, inplace=True)
+            betalinger["Inn på konto"] = betalinger["Inn på konto"].fillna(0)
+            betalinger["Ut fra konto"] = betalinger["Ut fra konto"].fillna(0)
 
             np_data = betalinger.to_numpy()
             np_data = np.delete(np_data, 2, 1)

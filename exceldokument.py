@@ -51,7 +51,3 @@ class excelDokument():
             # Utgifter
             worksheet.write(0, 6, 0)
             worksheet.write('F2:F' + str(len(sheet)), "=")
-
-
-
-

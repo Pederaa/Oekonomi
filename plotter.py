@@ -13,7 +13,7 @@ def plottEtterÅr(betalinger):
         x = []
         y = []
         for betaling in value:
-            x.append(betaling.datestamp.replace(year=(aar)))
+            x.append(betaling.datestamp.replace(year=1999))
             y.append(betaling.utFraKonto)
 
         ax.plot(x, y, label=str(aar))

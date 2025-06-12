@@ -7,7 +7,7 @@ import matplotlib.dates as mdates
 
 from lagBetalingsliste import lagListeAvBetalinger
 from betalingsSorterer import sorterEtterAarmanneder, sorterBetalingerEtterKategori
-from kategoriManager import fjernKategori
+from kategoriManager import fjernKategori, kunKategori
 from slaaSammen import slaaSammenDager, slaaSammenUker
 from exceldokument import excelDokument
 from plotter import plottEtterÅr
@@ -21,29 +21,17 @@ print("Program started")
 # Ordner betalingene (egen class) i en egen liste fra exel-dokumentet
 betalinger = lagListeAvBetalinger(inputmappe)
 
-#for betaling in betalinger:
-    #print(betaling.datestamp)
 
-# Fjerner kategorier jeg ikke vil ha med
-#betalinger = fjernKategori(betalinger, ["Ikke relevant", "Lønn", "Leie"])
-
-# Slå sammen uker i en betaling 
-#betalinger_per_uke = slaaSammenUker(betalinger)
-
-# Sorterer betalingene i en dict hvor nøkkelen er på formen "år-måned"
-
-# Sorterer betalingene i en dict hvor nøkkelen er etter hvilken kategori den tilhører
-# betalingerSortertKatagori = sorterBetalingerEtterKategori(betalinger)
 
 utskriftsmappe = "C://Users//Peder//OneDrive - NTNU//Dokumenter//GitHub//Betalinger//Output"
 
-
-#dok = excelDokument(betalinger_per_uke)
-#dok.columns = ["År", "Uke", "Ut", "Inn"]
-#dok.make("Output.xlsx", utskriftsmappe)
-
-nye_betalinger = fjernKategori(betalinger, ["Ikke relevant", "Lønn" "Leie"])
+nye_betalinger = kunKategori(betalinger, ["Handlevarer"])
 nye_betalinger = slaaSammenUker(nye_betalinger)
+
+
+dok = excelDokument(nye_betalinger)
+dok.columns = ["År", "Uke", "Ut", "Inn"]
+dok.make("Handlevarer per uke.xlsx", utskriftsmappe)
 
 plottEtterÅr(nye_betalinger)
 

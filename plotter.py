@@ -3,7 +3,8 @@ import Betalinger_class
 from matplotlib.dates import DateFormatter
 import datetime
 
-from betalingsSorterer import sorterEtterAarmanneder, sorterEtterAar
+from betalingsSorterer import sorterEtterAarmanneder, sorterEtterAar, sorterBetalingerEtterKategori
+from kategoriidentifiserer import getKategorier
 
 def plottEtterÅr(betalinger):
     betalingerSortertTid = sorterEtterAar(betalinger)
@@ -22,4 +23,22 @@ def plottEtterÅr(betalinger):
     ax.xaxis.set_major_formatter(date_form)
 
     plt.legend()
+    plt.show()
+
+
+def plottSector(betalinger):
+    betalingerEtterKategori = sorterBetalingerEtterKategori(betalinger)
+
+    kategorier = getKategorier()
+
+    sums = []
+    for kategori in kategorier:
+        try:
+            sums.append(betalingerEtterKategori[kategori].sum()[0])
+        except:
+            sums.append(0)
+            continue
+    
+    fig, ax = plt.subplots()
+    ax.pie(sums, labels=kategorier)
     plt.show()

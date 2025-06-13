@@ -13,7 +13,15 @@ kategorier = {
                     "Middag",
                     "Espresso House",
                     "Databrus",
-                    "7-eleven"],
+                    "7-eleven",
+                    "cafe",
+                    "7eleven",
+                    "Work-work",
+                    "Coca Cola",
+                    "Tgtg",
+                    "Drivethru",
+                    "Los Tacos Storo",
+                    "lunsj"],
 
     "Faste betalinger": ["Patreon: Membership", 
                    "Leger Uten Grenser"
@@ -26,7 +34,11 @@ kategorier = {
                    "Buckaroo",
                    "If Skadeforsikring",
                    "astral Coach",
-                   "astralcoach"],
+                   "astralcoach",
+                   "ingenioerer Uten Gr",
+                   "trondheim Sykkelkjo",
+                   "Gjensidige",
+                   "Acoach"],
     
     "Leie": ["Studentsamskipnaden",
             "Sit Efaktura",
@@ -39,7 +51,8 @@ kategorier = {
                    "Knut Skogstrand Gjerden",
                    "gibberish",
                    "tv-aksjonen",
-                   "rosa Sloeyfe"],
+                   "rosa Sloeyfe",
+                   "Google:donations"],
 
     "Reise": ["entur App",
               "Vipps:atb",
@@ -53,11 +66,16 @@ kategorier = {
               "Drosje",
               "Gotogate",
               "Gamezone.no",
-              "Norwegian Air Shuttle"],
+              "Norwegian Air Shuttle",
+              "Entur",
+              "ruter",
+              "bane Nor",
+              "banenor"],
 
     "Lønn": ["Lønn",
              "Statens Lånekasse",
-             "Lånekassa"],
+             "Lånekassa",
+             "Lånekassen"],
             
     "Fritidsinteresser": ["Ntnui Sjakk",
                           "Steamgames.com",
@@ -74,20 +92,27 @@ kategorier = {
                           "grimfield Games",
                           "My Mini Factory",
                           "Tønsberg Schackklubb",
-                          "Klarna:adlibris"],
+                          "Klarna:adlibris",
+                          "Deck Protector",
+                          "Titancraft",
+                          "Gridville",
+                          "Kino"],
     
     "Gaver": ["Aasne",
               "Lars",
               "Giro  Reservert transaksjon",
               "Gratulerer",
               "Hipp Hurra",
-              "Gave"],
+              "Gave",
+              "Kosibox",
+              "Puzzle You"],
             
     "Skole": ["Norges Tekn.naturvitensk.unive",
               "skap", 
               "Skap",
               "Fysikk-bøker", 
-              "Mattebøker"],
+              "Mattebøker",
+              "kompendiesalg"],
 
     "Ikke relevant": ["Kontoregulering",
                       "Kontoregulering",
@@ -110,3 +135,6 @@ def identifiserKategori(forklaring):
                 return kategori
 
     return "Annet"
+
+def getKategorier():
+    return kategorier.keys()

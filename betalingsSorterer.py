@@ -1,5 +1,6 @@
 from Betalinger_class import Betalinger
-from kategoriidentifiserer import identifiserKategori
+from kategoriidentifiserer import identifiserKategori, getKategorier
+
 
 def sorterEtterAarmanneder(betalinger):
     maaneder_dict = {} #dict(zip_longest(maaneder_liste, [], fillvalue=[]))
@@ -29,14 +30,16 @@ def sorterEtterAar(betalinger):
 
 
 def sorterBetalingerEtterKategori(betalinger):
-    sortertEtterKategori = {}
+    sortertEtterKategori = dict.fromkeys(getKategorier())
+    for item in sortertEtterKategori.keys():
+        sortertEtterKategori[item] = Betalinger()
 
     for betaling in betalinger:
         kategori = identifiserKategori(betaling.forklaring)
 
-        try:
-           sortertEtterKategori[kategori].append(betaling)
-        except:
-            sortertEtterKategori[kategori] = Betalinger()
+        if(kategori not in sortertEtterKategori):
+            raise "Kategori " + str(kategori) + " not found"
+        
+        sortertEtterKategori[kategori].append(betaling)
     
     return sortertEtterKategori

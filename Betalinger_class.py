@@ -10,7 +10,7 @@ class Betaling():
         self.dato = datestamp.day
         self.month = måneder[datestamp.month-1]
         self.year = datestamp.year
-        self.gooning = 2
+        self.currency = "kr"
 
         self.datestamp = datestamp
 
@@ -21,10 +21,10 @@ class Betaling():
         self.kategorier = []
     
     def __eq__(self, other):
-        return self.datestamp == other.datestamp and self.forklaring == other.forklaring and self.utFraKonto == other.utFraKonto and self.innPaaKonto == other.innPaaKonto
+        return self.datestamp == other.datestamp and self.currency == other.currency and self.forklaring == other.forklaring and self.utFraKonto == other.utFraKonto and self.innPaaKonto == other.innPaaKonto
 
     def __hash__(self):
-        return hash((self.datestamp, self.forklaring, self.utFraKonto, self.innPaaKonto))
+        return hash((self.datestamp, self.currency, self.forklaring, self.utFraKonto, self.innPaaKonto))
     
     def tonpArray(self, columns):
         row = np.empty(len(columns), dtype=object)
@@ -52,6 +52,7 @@ class Betaling():
 
 class Betalinger(list):
     def __init__(self, items=None):
+        self.currency = "kr"
         if items is None:
             items = []
         super().__init__(items)

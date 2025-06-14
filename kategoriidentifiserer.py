@@ -137,4 +137,4 @@ def identifiserKategori(forklaring):
     return "Annet"
 
 def getKategorier():
-    return kategorier.keys()
+    return list(kategorier.keys())

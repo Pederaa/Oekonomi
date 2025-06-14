@@ -10,7 +10,7 @@ from betalingsSorterer import sorterEtterAarmanneder, sorterBetalingerEtterKateg
 from kategoriManager import fjernKategori, kunKategori
 from slaaSammen import slaaSammenDager, slaaSammenUker
 from exceldokument import excelDokument
-from plotter import plottEtterÅr, plottSector
+from plotter import Plot
 
 from Betalinger_class import Betalinger
 
@@ -22,15 +22,18 @@ betalinger = lagListeAvBetalinger(inputmappe) # Ordner betalingene (egen class) 
 
 utskriftsmappe = "C://Users//Peder//OneDrive - NTNU//Dokumenter//GitHub//Betalinger//Output"
 
-nye_betalinger = kunKategori(betalinger, ["Lønn"])
-#nye_betalinger = slaaSammenUker(nye_betalinger)
+betalinger = fjernKategori(betalinger, ["Ikke relevant", "Annet"])
+ukentligeBetalinger = slaaSammenUker(betalinger)
 
-
-dok = excelDokument(nye_betalinger)
+dok = excelDokument(ukentligeBetalinger)
 dok.columns = ["År", "Dato", "Forklaring", "Ut", "Inn"]
 dok.make("Handlevarer per uke.xlsx", utskriftsmappe)
 
-plottEtterÅr(nye_betalinger)
+plot = Plot(3)
+plot.plottEtterÅr(0, ukentligeBetalinger)
+plot.plottEtterÅr(1, betalinger)
+plot.plottSector(2, betalinger)
 
-#plottSector(betalinger)
+plot.show()
+
 print("Program Completes")

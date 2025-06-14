@@ -54,10 +54,10 @@ class Plot:
         self.ax[index].legend()
         self.addTitles(index, betalinger)
 
-
+    # Todo: endre på denne
     def plottSector(self, index, betalinger):
         self.checkInInfexOutOuBounds(index)
-        betalingerEtterKategori = sorterBetalingerEtterKategori(betalinger)
+        betalingerEtterKategori = sorterBetalingerEtterTags(betalinger)
 
         kategorier = list(getKategorier())
 

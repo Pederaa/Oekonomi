@@ -11,6 +11,7 @@ from kategoriManager import *
 from slaaSammen import *
 from exceldokument import *
 from plotter import *
+from tagManager import *
 
 from Betalinger_class import Betalinger
 
@@ -22,20 +23,17 @@ betalinger = lagListeAvBetalinger(inputmappe) # Ordner betalingene (egen class) 
 
 utskriftsmappe = "C://Users//Peder//OneDrive - NTNU//Dokumenter//GitHub//Betalinger//Output"
 
-betalinger = fjernKategori(betalinger, ["Ikke relevant", "Annet", "Lønn"])
+betalinger = kunTag(betalinger, ["Handlevarer"])
 ukentligeBetalinger = slaaSammenUker(betalinger)
 
-print(identifiserKategori("Kontoregulering  393 Penger Fra Lånekassa  "))
+dok = excelDokument(betalinger)
+dok.columns = ["År", "Dato", "Forklaring", "Ut", "Inn"]
+dok.make("Handlevarer", utskriftsmappe)
 
-#dok = excelDokument(ukentligeBetalinger)
-#dok.columns = ["År", "Dato", "Forklaring", "Ut", "Inn"]
-#dok.make("Handlevarer per uke.xlsx", utskriftsmappe)
-
-plot = Plot(3)
+plot = Plot(2)
 plot.plottEtterÅr(0, ukentligeBetalinger)
 plot.plottEtterÅr(1, betalinger)
-plot.plottSector(2, betalinger)
 
 plot.show()
 
-print("Program Completes")
+print("Program Complete")

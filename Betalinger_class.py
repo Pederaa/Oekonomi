@@ -3,6 +3,8 @@ import pandas as pd
 from datetime import datetime as dt
 from itertools import zip_longest
 
+from Tag import *
+
 måneder = ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"]
 
 class Betaling():
@@ -18,7 +20,7 @@ class Betaling():
         self.utFraKonto = utFraKonto
         self.innPaaKonto = innPaaKonto
 
-        self.kategorier = []
+        self.tags = Tags()
     
     def __eq__(self, other):
         return self.datestamp == other.datestamp and self.currency == other.currency and self.forklaring == other.forklaring and self.utFraKonto == other.utFraKonto and self.innPaaKonto == other.innPaaKonto

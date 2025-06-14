@@ -1,5 +1,5 @@
-from Betalinger_class import Betalinger
-from kategoriidentifiserer import identifiserKategori, getKategorier
+from Betalinger_class import *
+from kategoriidentifiserer import *
 
 
 def sorterEtterAarmanneder(betalinger):

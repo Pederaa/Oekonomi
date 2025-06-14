@@ -1,4 +1,4 @@
-from kategoriidentifiserer import identifiserKategori
+from kategoriidentifiserer import *
 from Betalinger_class import *
 
 def fjernKategori(betalinger, kategorierAaFjerne):

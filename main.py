@@ -5,12 +5,12 @@ from datetime import datetime as dt
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
-from lagBetalingsliste import lagListeAvBetalinger
-from betalingsSorterer import sorterEtterAarmanneder, sorterBetalingerEtterKategori
-from kategoriManager import fjernKategori, kunKategori
-from slaaSammen import slaaSammenDager, slaaSammenUker
-from exceldokument import excelDokument
-from plotter import Plot
+from lagBetalingsliste import *
+from betalingsSorterer import *
+from kategoriManager import *
+from slaaSammen import *
+from exceldokument import *
+from plotter import *
 
 from Betalinger_class import Betalinger
 
@@ -22,12 +22,14 @@ betalinger = lagListeAvBetalinger(inputmappe) # Ordner betalingene (egen class) 
 
 utskriftsmappe = "C://Users//Peder//OneDrive - NTNU//Dokumenter//GitHub//Betalinger//Output"
 
-betalinger = fjernKategori(betalinger, ["Ikke relevant", "Annet"])
+betalinger = fjernKategori(betalinger, ["Ikke relevant", "Annet", "Lønn"])
 ukentligeBetalinger = slaaSammenUker(betalinger)
 
-dok = excelDokument(ukentligeBetalinger)
-dok.columns = ["År", "Dato", "Forklaring", "Ut", "Inn"]
-dok.make("Handlevarer per uke.xlsx", utskriftsmappe)
+print(identifiserKategori("Kontoregulering  393 Penger Fra Lånekassa  "))
+
+#dok = excelDokument(ukentligeBetalinger)
+#dok.columns = ["År", "Dato", "Forklaring", "Ut", "Inn"]
+#dok.make("Handlevarer per uke.xlsx", utskriftsmappe)
 
 plot = Plot(3)
 plot.plottEtterÅr(0, ukentligeBetalinger)

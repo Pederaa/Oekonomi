@@ -3,8 +3,8 @@ import Betalinger_class
 from matplotlib.dates import DateFormatter
 import datetime
 
-from betalingsSorterer import sorterEtterAarmanneder, sorterEtterAar, sorterBetalingerEtterKategori
-from kategoriidentifiserer import getKategorier
+from betalingsSorterer import *
+from kategoriidentifiserer import *
 
 
 class Plot:
@@ -18,6 +18,22 @@ class Plot:
     
     def show(self):
         plt.show()
+    
+    def addTitles(self, index, betalinger):
+        self.ax[index].set_title(betalinger.tittel)
+        self.ax[index].set_xlabel(betalinger.xlabel)
+        self.ax[index].set_ylabel(betalinger.currency)
+
+    def plotRekke(self, index, betalinger):
+        self.checkInInfexOutOuBounds(index)
+        x = []
+        y = []
+        for betaling in betalinger:
+            x.append(betaling.datestamp)
+            y.append(betaling.utFraKonto)
+
+        self.ax[index].plot(x, y)
+        self.addTitles(index, betalinger)
 
 
     def plottEtterÅr(self, index, betalinger):
@@ -36,7 +52,7 @@ class Plot:
         date_form = DateFormatter("%d.%m")
         self.ax[index].xaxis.set_major_formatter(date_form)
         self.ax[index].legend()
-
+        self.addTitles(index, betalinger)
 
 
     def plottSector(self, index, betalinger):
@@ -45,11 +61,15 @@ class Plot:
 
         kategorier = list(getKategorier())
 
+        kategorierAaPlotte = []
         sums = []
-        for kategori in kategorier:            
-            print(str(kategori) + ": " + str(betalingerEtterKategori[kategori].sum()[0]))
+        for kategori in kategorier:
+            totalUtgift = betalingerEtterKategori[kategori].sum()[0]
+            if (totalUtgift == 0):
+                continue
+
+            kategorierAaPlotte.append(kategori)
             sums.append(betalingerEtterKategori[kategori].sum()[0])
-                    
-        print(kategorier)
-        print(sums)
-        self.ax[index].pie(sums, labels=kategorier)
+        
+        self.ax[index].pie(sums, labels=kategorierAaPlotte)
+        self.addTitles(index, betalinger)

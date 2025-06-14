@@ -52,7 +52,10 @@ class Betaling():
 
 class Betalinger(list):
     def __init__(self, items=None):
+        self.tittel = "Betalinger"
+        self.xlabel = "Tid"
         self.currency = "kr"
+        
         if items is None:
             items = []
         super().__init__(items)

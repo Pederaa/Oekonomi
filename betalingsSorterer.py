@@ -1,5 +1,4 @@
 from Betalinger_class import *
-from kategoriidentifiserer import *
 from tagManager import *
 
 def sorterEtterAarmanneder(betalinger):

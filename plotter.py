@@ -4,7 +4,6 @@ from matplotlib.dates import DateFormatter
 import datetime
 
 from betalingsSorterer import *
-from kategoriidentifiserer import *
 
 
 class Plot:
@@ -57,19 +56,19 @@ class Plot:
     # Todo: endre på denne
     def plottSector(self, index, betalinger):
         self.checkInInfexOutOuBounds(index)
-        betalingerEtterKategori = sorterBetalingerEtterTags(betalinger)
+        betalingerEtterTag = sorterBetalingerEtterTags(betalinger)
 
-        kategorier = list(getKategorier())
+        tager = list(alltags.getTags())
 
-        kategorierAaPlotte = []
+        tagerAaPlotte = []
         sums = []
-        for kategori in kategorier:
-            totalUtgift = betalingerEtterKategori[kategori].sum()[0]
+        for tag in tager:
+            totalUtgift = betalingerEtterTag[tag].sum()[0]
             if (totalUtgift == 0):
                 continue
 
-            kategorierAaPlotte.append(kategori)
-            sums.append(betalingerEtterKategori[kategori].sum()[0])
+            tagerAaPlotte.append(tag)
+            sums.append(betalingerEtterTag[tag].sum()[0])
         
-        self.ax[index].pie(sums, labels=kategorierAaPlotte)
+        self.ax[index].pie(sums, labels=tagerAaPlotte)
         self.addTitles(index, betalinger)

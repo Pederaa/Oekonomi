@@ -7,7 +7,6 @@ import matplotlib.dates as mdates
 
 from lagBetalingsliste import *
 from betalingsSorterer import *
-from kategoriManager import *
 from slaaSammen import *
 from exceldokument import *
 from plotter import *

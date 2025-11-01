@@ -7,6 +7,7 @@ Hensikten med dette prosjektet er å lage et program som kan hente inn og analys
 - [ ] Gjør indeksene til plotteren til en kwarg for lesbarhet
 - [ ] Gjør flere av de frie funksjonene om til klassefunksjoner
 - [ ] Defiener inn fjernAlleFør og fjernAlleEtter- funksjonene
+- [ ] Finn en bedre måte å implementere tagmanager på
 
 ## Klasser
 ### Betaling(self, datestamp, forklaring, utFraKonto, innPaaKonto)
@@ -38,7 +39,6 @@ Plotter betalingene i fine plots matplotlib. Den tar inn et argument for hvor ma
 - show(self): Viser plottet
 - addTitles(self, indeks, betalinger): Setter aksene til plotet til det betalingen har selv. 
 - plotRekke(self, index, betalinger): plotter en tidsgraf med utbeløp langs y-aksen. Kaller automatisk checkInInfexOutOuBounds og addTitles. 
-- plottEtterÅr(self, index, betalinger): Skiller betalinger etter år og plotter dem over hverandre i samme graf. 
 - plottSector(self, index, betalinger): Skiller betalinger etter tager og plotter dem i sektordiagram opp mot hverandre. 
 
 
@@ -70,7 +70,7 @@ Tar inn en folder og finner alle exceldokumenter der. Den slår sammen alle beta
 Tar inn en betalingsliste og slår sammen alle betalingene med samme egenskap. Har bare laget funksjoner for samme dag og samme dato. Er nyttig for å fjerne støy og se trender. 
 
 
-### findTags(betaling)
+### findTags(betaling, tagManager)
 Finner de tagene som er relevante for en betaling, og lager en egen liste for den. Returnerer lista
 
 

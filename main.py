@@ -23,20 +23,21 @@ print("Program started")
 
 tagmanager = basicTagManager()
 betalinger = lagListeAvBetalinger(inputmappe, tagmanager)
-
 utskriftsmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//GitHub//Betalinger//Output"
 
 betalinger = kunTag(betalinger, ["Handlevarer"], tagmanager)
 ukentligeBetalinger = slaaSammenUker(betalinger)
+dagligebetalinger = slaaSammenDager(betalinger)
 
-dok = excelDokument(betalinger)
-dok.columns = ["År", "Dato", "Forklaring", "Ut", "Inn"]
-dok.make("Handlevarer.xlsx", utskriftsmappe)
+betalinger.tittel = "Vanlige betalinger"
+ukentligeBetalinger.tittel = "Ukentlige betalinger"
+dagligebetalinger.tittel = "Daglige betalinger"
 
-#plot = Plot(2)
-#plot.plottEtterÅr(0, ukentligeBetalinger)
-#plot.plottEtterÅr(1, betalinger)
+plot = Plot(3)
+plot.plotRekke(0, betalinger)
+plot.plotRekke(2, ukentligeBetalinger)
+plot.plotRekke(1, dagligebetalinger)
 
-#plot.show()
+plot.show()
 
 print("Program Complete")

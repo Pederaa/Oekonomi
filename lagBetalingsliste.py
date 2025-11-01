@@ -7,7 +7,7 @@ from Betalinger_class import *
 from tagManager import *
 
 
-def lagListeAvBetalinger(foldernavn):
+def lagListeAvBetalinger(foldernavn, tagmanager):
     print("Henter betalinger fra: " + foldernavn)
     kombinertListeAvBetalinger = Betalinger()
     for filename in os.listdir(foldernavn):
@@ -24,7 +24,7 @@ def lagListeAvBetalinger(foldernavn):
 
         for i in range(0, len(np_data)): # Sorterer betalingen etter måned år.
             new_betaling = Betaling(np_data[i][0], np_data[i][1], np_data[i][2], np_data[i][3])
-            new_betaling.tags = findTags(new_betaling)
+            new_betaling.tags = findTags(new_betaling, tagmanager)
             kombinertListeAvBetalinger.append(new_betaling)
 
     print("Sletter duplikater")

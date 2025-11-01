@@ -25,6 +25,9 @@ class Betaling():
     def __eq__(self, other):
         return self.datestamp == other.datestamp and self.currency == other.currency and self.forklaring == other.forklaring and self.utFraKonto == other.utFraKonto and self.innPaaKonto == other.innPaaKonto
 
+    def __lt__(self, other):
+        return self.datestamp <= other.datestamp
+
     def __hash__(self):
         return hash((self.datestamp, self.currency, self.forklaring, self.utFraKonto, self.innPaaKonto))
     

@@ -6,13 +6,13 @@ Hensikten med dette prosjektet er å lage et program som kan hente inn og analys
 - [ ] Legg til flere kwargs i exceldokumentet
 - [ ] Gjør indeksene til plotteren til en kwarg for lesbarhet
 - [ ] Gjør flere av de frie funksjonene om til klassefunksjoner
-- [ ] Lag en tagManager som inneholder alle tagene som brukes, istedenfor å instansere en alltags i modulen.
 - [ ] Defiener inn fjernAlleFør og fjernAlleEtter- funksjonene
 
 ## Klasser
 ### Betaling(self, datestamp, forklaring, utFraKonto, innPaaKonto)
 Lagrer en betaling som en instanse av en "betalingsklasse". Denne inneholder all informasjon om klassen, f.eks.:beløp inn og ut, dato, beskrivelse osv. Funksjoner:
 - __eq__(self, other): Brukes for å se om to betalinger er like
+- __lt__(self, other): Brukes for å se om en betaling skjer før den andre.
 - __hash__(self): Lager en hash-id av betalingen (elns)
 - tonpArray(self, columns): Lager en (1, len(columns))-dimensional np-array av betalingen. 
 
@@ -52,6 +52,9 @@ Inheriter fra list. Lager en liste med tags som kan itereres over for å sjekke 
 - getTags(self): Returnerer en liste over alle tags i lista
 - containsName(self, tagname): Sjekker om en string av en tag er i taglista. Returnerer true eller false. 
 - containsNameList(self, tagnameList): Sjekker om en av tagene i en liste er i taglista. 
+
+## basicTagManager(self)
+Inheriter fra Tags. Inneholder alle tagsene som identifiserer kjøpene mine. Er i teorien mulig å lage flere tagmanagers, men jeg bruker bare denne. 
 
 
 

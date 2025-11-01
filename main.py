@@ -20,12 +20,13 @@ inputmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//NTNU//Øko
 # inputmappe = "C://Users//Peder//OneDrive - NTNU//Dokumenter//GitHub//Betalinger" #Laptop
 
 print("Program started")
-betalinger = lagListeAvBetalinger(inputmappe) # Ordner betalingene (egen class) i en egen liste fra exel-dokumentet
+
+tagmanager = basicTagManager()
+betalinger = lagListeAvBetalinger(inputmappe, tagmanager)
 
 utskriftsmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//GitHub//Betalinger//Output"
 
-
-betalinger = kunTag(betalinger, ["Handlevarer"])
+betalinger = kunTag(betalinger, ["Handlevarer"], tagmanager)
 ukentligeBetalinger = slaaSammenUker(betalinger)
 
 dok = excelDokument(betalinger)

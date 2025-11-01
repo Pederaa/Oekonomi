@@ -53,11 +53,11 @@ class Plot:
         self.addTitles(index, betalinger)
 
     # Todo: endre på denne
-    def plottSector(self, index, betalinger):
+    def plottSector(self, index, betalinger, tagmanager):
         self.checkInInfexOutOuBounds(index)
         betalingerEtterTag = sorterBetalingerEtterTags(betalinger)
 
-        tager = list(alltags.getTags())
+        tager = list(tagmanager.getTags())
 
         tagerAaPlotte = []
         sums = []

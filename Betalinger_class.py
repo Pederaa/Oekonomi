@@ -72,7 +72,21 @@ class Betalinger(list):
             utgift += betaling.utFraKonto
         
         return utgift, innskudd
-    
+
+
     def sorts(self):
         self.sort()
-        #self.sort(key=lambda obj: obj.datestamp)
+
+    def print(self):
+        for betaling in self:
+            print(str(betaling.datestamp) + "\t" + str(betaling.forklaring) + "\t" + str(betaling.utFraKonto) + "\t" + str(betaling.innPaaKonto))
+    
+    def fjernAllefør(self, timestamp):
+        pass
+
+    def fjernAlleEtter(self, timestamp):
+        pass
+
+    def getÅr(self, år):
+        self.fjernAllefør(dt(år, 1, 1))
+        self.fjernAlleEtter(dt(år, 12, 31))

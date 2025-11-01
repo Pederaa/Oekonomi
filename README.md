@@ -7,7 +7,7 @@ Hensikten med dette prosjektet er å lage et program som kan hente inn og analys
 - [ ] Gjør indeksene til plotteren til en kwarg for lesbarhet
 - [ ] Gjør flere av de frie funksjonene om til klassefunksjoner
 - [ ] Lag en tagManager som inneholder alle tagene som brukes, istedenfor å instansere en alltags i modulen.
-- [ ] Legg til output-tekst
+- [ ] Defiener inn fjernAlleFør og fjernAlleEtter- funksjonene
 
 ## Klasser
 ### Betaling(self, datestamp, forklaring, utFraKonto, innPaaKonto)
@@ -21,6 +21,10 @@ Lagrer en betaling som en instanse av en "betalingsklasse". Denne inneholder all
 Inheriter fra list. Lager et liste av betalinger sortert etter betalingstidspunkt. Funksjoner
 - sum(self): Returnerer en tuple med totale utgifter og innskudd i lista
 - sort(self): Sorterer betalingene etter tisdpunkt
+- print(self): Printer ut alle elementene i lista
+- fjernAllefør(self. timestamp): Fjern alle betalinger fra etter timestampen
+- fjernAlleEtter(self, timestamp): Fjern alle betalinger fra før timestampen
+- getÅr(self, år):
 
 ## excelDokument(self, betalinger_)
 Et instans av et excel-dokument som skal skrive betalinger-lista ut osm en fin excel-fil. Funksjoner:

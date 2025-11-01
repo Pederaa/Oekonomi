@@ -1,6 +1,7 @@
 from Betalinger_class import Betalinger
 
 def slaaSammenDager(betalinger):
+    print("Slår sammen betalinger i samme dag.")
     ny_betalingsliste = Betalinger()
     ny_betalingsliste.append(betalinger[0])
     ny_betalingsliste[-1].forklaring = None
@@ -16,6 +17,7 @@ def slaaSammenDager(betalinger):
     return ny_betalingsliste
 
 def slaaSammenUker(betalinger):
+    print("Slår sammen betalinger i samme uke.")
     if len(betalinger) == 0:
         raise IndexError("Betalingslista er tom")
     

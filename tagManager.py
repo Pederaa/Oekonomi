@@ -172,6 +172,12 @@ def findTags(betaling):
 
 
 def fjernTager(betalinger, tagerAaFjerne):
+    print("Fjerner betalinger med tagene: ", end="")
+    for tag in tagerAaFjerne:
+        print(tag, end="")
+        print(",", end="")
+    print("")
+
     ny_betalingsListe = Betalinger()
     for betaling in betalinger:
         j = True

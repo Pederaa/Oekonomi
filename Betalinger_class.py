@@ -73,5 +73,6 @@ class Betalinger(list):
         
         return utgift, innskudd
     
-    def sortByDatestamp(self):
-        self.sort(key=lambda obj: obj.datestamp)
+    def sorts(self):
+        self.sort()
+        #self.sort(key=lambda obj: obj.datestamp)

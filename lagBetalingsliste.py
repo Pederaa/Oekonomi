@@ -8,10 +8,12 @@ from tagManager import *
 
 
 def lagListeAvBetalinger(foldernavn):
+    print("Henter betalinger fra: " + foldernavn)
     kombinertListeAvBetalinger = Betalinger()
     for filename in os.listdir(foldernavn):
         if filename.endswith('.xlsx') or filename.endswith('.xls'):
             filename = os.path.join(foldernavn, filename)
+            print("\t Henter fil: " + filename)
             betalinger = pd.read_excel(filename)
 
             betalinger["Inn på konto"] = betalinger["Inn på konto"].fillna(0)
@@ -25,8 +27,9 @@ def lagListeAvBetalinger(foldernavn):
             new_betaling.tags = findTags(new_betaling)
             kombinertListeAvBetalinger.append(new_betaling)
 
-
+    print("Sletter duplikater")
     kombinertListeAvBetalinger = Betalinger(set(kombinertListeAvBetalinger))
-    kombinertListeAvBetalinger.sort()
+    kombinertListeAvBetalinger.sorts()
 
+    print("Betalinger fra " + foldernavn + " ferdig hentet.")
     return kombinertListeAvBetalinger

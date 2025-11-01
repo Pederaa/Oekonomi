@@ -1,10 +1,14 @@
 # Automatisk Økonomianalyse
 Hensikten med dette prosjektet er å lage et program som kan hente inn og analysere kontoutskriften min og fremstille betalinger jeg har gjort på en oversiktlig måte. Målet er å bruke denne koden til å bli mer bevist på egen pengebruk og ta bedre økonomiske valg. 
 
+## TODO
+- [ ] Endre exceldokument til å lage sheets med dictionaries isteden. 
+- [ ] Legg til flere kwargs i exceldokumentet
+- [ ] Gjør indeksene til plotteren til en kwarg for lesbarhet
 
 ## Klasser
 ### Betaling(self, datestamp, forklaring, utFraKonto, innPaaKonto)
-🤞Lagrer en betaling som en instanse av en "betalingsklasse". Denne inneholder all informasjon om klassen, f.eks.:beløp inn og ut, dato, beskrivelse osv. Funksjoner:
+Lagrer en betaling som en instanse av en "betalingsklasse". Denne inneholder all informasjon om klassen, f.eks.:beløp inn og ut, dato, beskrivelse osv. Funksjoner:
 - __eq__(self, other): Brukes for å se om to betalinger er like
 - __hash__(self): Lager en hash-id av betalingen (elns)
 - tonpArray(self, columns): Lager en (1, len(columns))-dimensional np-array av betalingen. 
@@ -30,6 +34,20 @@ Plotter betalingene i fine plots matplotlib. Den tar inn et argument for hvor ma
 - plottEtterÅr(self, index, betalinger): Skiller betalinger etter år og plotter dem over hverandre i samme graf. 
 - plottSector(self, index, betalinger): Skiller betalinger etter tager og plotter dem i sektordiagram opp mot hverandre. 
 
+
+## Tag(self, name, keyPhrases)
+En tag er et objekt som sjekker beskrivelsen til en betaling og legger seg selt til dersom den er aktuell for betalingen. Den har en liste med keyphrases den ser etter. Funksjoner:
+- isin(self, betaling): Sjekker om noen av keyphrasene finnes i betalingen, i så fall skal den returnere true. 
+
+
+## Tags(self, items=None):
+Inheriter fra list. Lager en liste med tags som kan itereres over for å sjekke om noen av dem er der. Funksjoner:
+- getTags(self): Returnerer en liste over alle tags i lista
+- containsName(self, tagname): Sjekker om en string av en tag er i taglista. Returnerer true eller false. 
+- containsNameList(self, tagnameList): Sjekker om en av tagene i en liste er i taglista. 
+
+
+
 ## Andre ekstra funkjsoner
 ### Dict-funksjonene 
 Noen ganger er det hensiktsmessig å dele en betalingsliste etter egenskaper. Det har vært tre egenskaper jeg har vært interessert i: måned, år og tags (mer om de senere). Alle funksjonene returner en dict med egenskapen som nøkkel.
@@ -38,7 +56,17 @@ Noen ganger er det hensiktsmessig å dele en betalingsliste etter egenskaper. De
 Tar inn en folder og finner alle exceldokumenter der. Den slår sammen alle betalingslistene til en en enkelt betalingsliste, sletter alle like elementer med "set" og sorterer lista. Den returnerer en lista. 
 
 
-## TODO
-- [ ] Endre exceldokument til å lage sheets med dictionaries isteden. 
-- [ ] Legg til flere kwargs i exceldokumentet
-- [ ] Gjør indeksene til plotteren til en kwarg for lesbarhet
+### slå-sammen-funksjonene
+Tar inn en betalingsliste og slår sammen alle betalingene med samme egenskap. Har bare laget funksjoner for samme dag og samme dato. Er nyttig for å fjerne støy og se trender. 
+
+
+### findTags(betaling)
+Finner de tagene som er relevante for en betaling, og lager en egen liste for den. Returnerer lista
+
+
+### fjernTagger(betalinger, tagerAaFjerne)
+Fjerner de betalingene som inneholder tagene i taglista. Returnerer en ny liste
+
+
+### kunTag(betalinger, tagerAaBeholde)
+Fjerner de betalingene som ikke inneholder minst en av betalingene i lista. 

@@ -1,11 +1,13 @@
 import numpy as np
 import pandas as pd
 import os
+
 from Betalinger_class import *
+
 from tagManager import *
 
-def lagListeAvBetalinger(foldernavn):
 
+def lagListeAvBetalinger(foldernavn):
     kombinertListeAvBetalinger = Betalinger()
     for filename in os.listdir(foldernavn):
         if filename.endswith('.xlsx') or filename.endswith('.xls'):
@@ -23,7 +25,8 @@ def lagListeAvBetalinger(foldernavn):
             new_betaling.tags = findTags(new_betaling)
             kombinertListeAvBetalinger.append(new_betaling)
 
+
     kombinertListeAvBetalinger = Betalinger(set(kombinertListeAvBetalinger))
-    kombinertListeAvBetalinger.sortByDatestamp()
+    kombinertListeAvBetalinger.sort()
 
     return kombinertListeAvBetalinger

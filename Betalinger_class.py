@@ -31,7 +31,8 @@ class Betaling():
     def tonpArray(self, columns):
         row = np.empty(len(columns), dtype=object)
         for j in range(len(columns)):
-            match columns[j].lower():
+            col = columns[j].lower()
+            match col:
                 case "dato":
                     row[j] = str(self.dato) + ". " + str(self.month) + " " + str(self.year)
                 case "år":
@@ -49,7 +50,8 @@ class Betaling():
                 case "datestamp":
                     row[j] = self.datestamp
                 case _:
-                    raise Exception('Ukjent kolonne: "' + columns[j] + '"') 
+                    raise Exception('Ukjent kolonne: "' + columns[j] + '"')
+            pass
         return row
 
 class Betalinger(list):

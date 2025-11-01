@@ -15,8 +15,7 @@ class Plot:
         if(index >= self.numberOfPlots):
             raise IndexError
     
-    def show(self):
-        plt.show()
+    def show(self): plt.show()
     
     def addTitles(self, index, betalinger):
         self.ax[index].set_title(betalinger.tittel)

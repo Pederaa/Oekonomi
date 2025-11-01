@@ -5,6 +5,9 @@ Hensikten med dette prosjektet er å lage et program som kan hente inn og analys
 - [ ] Endre exceldokument til å lage sheets med dictionaries isteden. 
 - [ ] Legg til flere kwargs i exceldokumentet
 - [ ] Gjør indeksene til plotteren til en kwarg for lesbarhet
+- [ ] Gjør flere av de frie funksjonene om til klassefunksjoner
+- [ ] Lag en tagManager som inneholder alle tagene som brukes, istedenfor å instansere en alltags i modulen.
+- [ ] Legg til output-tekst
 
 ## Klasser
 ### Betaling(self, datestamp, forklaring, utFraKonto, innPaaKonto)

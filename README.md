@@ -2,6 +2,7 @@
 Hensikten med dette prosjektet er å lage et program som kan hente inn og analysere kontoutskriften min og fremstille betalinger jeg har gjort på en oversiktlig måte. Målet er å bruke denne koden til å bli mer bevist på egen pengebruk og ta bedre økonomiske valg. 
 
 ## TODO
+- [ ] Verifiser at koden faktisk fungerer
 - [ ] Endre exceldokument til å lage sheets med dictionaries isteden. 
 - [ ] Legg til flere kwargs i exceldokumentet
 - [ ] Gjør indeksene til plotteren til en kwarg for lesbarhet
@@ -55,8 +56,6 @@ Inheriter fra list. Lager en liste med tags som kan itereres over for å sjekke 
 
 ## basicTagManager(self)
 Inheriter fra Tags. Inneholder alle tagsene som identifiserer kjøpene mine. Er i teorien mulig å lage flere tagmanagers, men jeg bruker bare denne. 
-
-
 
 ## Andre ekstra funkjsoner
 ### Dict-funksjonene 

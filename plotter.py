@@ -15,8 +15,7 @@ class Plot:
         if(index >= self.numberOfPlots):
             raise IndexError
     
-    def show(self):
-        plt.show()
+    def show(self): plt.show()
     
     def addTitles(self, index, betalinger):
         self.ax[index].set_title(betalinger.tittel)
@@ -34,31 +33,12 @@ class Plot:
         self.ax[index].plot(x, y)
         self.addTitles(index, betalinger)
 
-
-    def plottEtterÅr(self, index, betalinger):
-        self.checkInInfexOutOuBounds(index)
-        betalingerSortertTid = sorterEtterAar(betalinger)
-
-        for aar, value in betalingerSortertTid.items():
-            x = []
-            y = []
-            for betaling in value:
-                x.append(betaling.datestamp.replace(year=1999))
-                y.append(betaling.utFraKonto)
-
-            self.ax[index].plot(x, y, label=str(aar))
-
-        date_form = DateFormatter("%d.%m")
-        self.ax[index].xaxis.set_major_formatter(date_form)
-        self.ax[index].legend()
-        self.addTitles(index, betalinger)
-
     # Todo: endre på denne
-    def plottSector(self, index, betalinger):
+    def plottSector(self, index, betalinger, tagmanager):
         self.checkInInfexOutOuBounds(index)
         betalingerEtterTag = sorterBetalingerEtterTags(betalinger)
 
-        tager = list(alltags.getTags())
+        tager = list(tagmanager.getTags())
 
         tagerAaPlotte = []
         sums = []

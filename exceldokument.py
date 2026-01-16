@@ -4,6 +4,8 @@ from datetime import datetime as dt
 from itertools import zip_longest
 import numpy as np
 
+import os
+
 class excelDokument():
     def __init__(self, betalinger_):
         self.betalinger = betalinger_
@@ -22,13 +24,15 @@ class excelDokument():
 
 
     def make(self, filname, folder, **kwargs):
+        print("Lager excel-dokument i mappe: " + folder)
         sheet = self.lagSheet(self.betalinger)
         try:
             sheet_name = kwargs["sheet_name"]
         except:
             sheet_name = "Ark 1"
 
-        with pd.ExcelWriter(folder+"//"+filname, engine="xlsxwriter") as writer:
+        fullpath = os.path.join(folder, filname)
+        with pd.ExcelWriter(fullpath, engine="xlsxwriter") as writer:
             to_write = pd.DataFrame(sheet, columns=self.columns)
             to_write.to_excel(writer, sheet_name=sheet_name)
 
@@ -51,3 +55,5 @@ class excelDokument():
             # Utgifter
             worksheet.write(0, 6, 0)
             worksheet.write('F2:F' + str(len(sheet)), "=")
+
+        print("Document" + str(filname) + "made")

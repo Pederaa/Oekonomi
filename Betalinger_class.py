@@ -25,13 +25,17 @@ class Betaling():
     def __eq__(self, other):
         return self.datestamp == other.datestamp and self.currency == other.currency and self.forklaring == other.forklaring and self.utFraKonto == other.utFraKonto and self.innPaaKonto == other.innPaaKonto
 
+    def __lt__(self, other):
+        return self.datestamp <= other.datestamp
+
     def __hash__(self):
         return hash((self.datestamp, self.currency, self.forklaring, self.utFraKonto, self.innPaaKonto))
     
     def tonpArray(self, columns):
         row = np.empty(len(columns), dtype=object)
         for j in range(len(columns)):
-            match columns[j].lower():
+            col = columns[j].lower()
+            match col:
                 case "dato":
                     row[j] = str(self.dato) + ". " + str(self.month) + " " + str(self.year)
                 case "år":
@@ -49,7 +53,8 @@ class Betaling():
                 case "datestamp":
                     row[j] = self.datestamp
                 case _:
-                    raise Exception('Ukjent kolonne: "' + columns[j] + '"') 
+                    raise Exception('Ukjent kolonne: "' + columns[j] + '"')
+            pass
         return row
 
 class Betalinger(list):
@@ -70,6 +75,21 @@ class Betalinger(list):
             utgift += betaling.utFraKonto
         
         return utgift, innskudd
+
+
+    def sorts(self):
+        self.sort()
+
+    def print(self):
+        for betaling in self:
+            print(str(betaling.datestamp) + "\t" + str(betaling.forklaring) + "\t" + str(betaling.utFraKonto) + "\t" + str(betaling.innPaaKonto))
     
-    def sortByDatestamp(self):
-        self.sort(key=lambda obj: obj.datestamp)
+    def fjernAllefør(self, timestamp):
+        pass
+
+    def fjernAlleEtter(self, timestamp):
+        pass
+
+    def getÅr(self, år):
+        self.fjernAllefør(dt(år, 1, 1))
+        self.fjernAlleEtter(dt(år, 12, 31))

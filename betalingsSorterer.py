@@ -28,13 +28,13 @@ def sorterEtterAar(betalinger):
     return aar_dict
 
 
-def sorterBetalingerEtterTags(betalinger):
-    sortertEtterTag = dict.fromkeys(alltags.getTags())
+def sorterBetalingerEtterTags(betalinger, tagManager):
+    sortertEtterTag = dict.fromkeys(tagManager.getTags())
     for item in sortertEtterTag.keys():
         sortertEtterTag[item] = Betalinger()
 
     for betaling in betalinger:
-        tags = findTags(betaling)
+        tags = findTags(betaling, tagManager)
         for tag in tags:
             sortertEtterTag[tag.name].append(betaling)
     

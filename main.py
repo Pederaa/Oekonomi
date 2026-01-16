@@ -17,6 +17,12 @@ from Betalinger_class import Betalinger
 import os
 
 inputmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//NTNU//Økonomi//Betalinger" #PC 
+if not os.path.isdir(inputmappe):
+    inputmappe = "C://Users//Peder//OneDrive - NTNU//Dokumenter//GitHub//Betalinger" #Laptop
+
+    if not os.path.isdir(inputmappe):
+        raise FileExistsError(f"Ingen mappe funnet: {inputmappe}")
+
 # inputmappe = "C://Users//Peder//OneDrive - NTNU//Dokumenter//GitHub//Betalinger" #Laptop
 
 print("Program started")
@@ -41,7 +47,8 @@ while True:
     for option in options.keys():
         print(f"{c}: {option}")
         c += 1
-    
+    print(f"{c}: Exit")
+
     while True:
         try:
             answer = int(input(""))
@@ -51,11 +58,19 @@ while True:
             continue
 
     c = 0
-    for option, funct in options:
+    for option, funct in options.items():
         if c == answer:
             print(f"Running funtion {option}")
-            break
+        c += 1
+    if c == answer:
+        print("Exiting application")
+        break
 
+    print()
+    print()
+    print()
+
+"""
 betalinger = fjernTager(betalinger, ["Handlevarer"])
 ukentligeBetalinger = slaaSammenUker(betalinger)
 dagligebetalinger = slaaSammenDager(betalinger)
@@ -72,3 +87,4 @@ plot.plotRekke(1, dagligebetalinger)
 plot.show()
 
 print("Program Complete")
+"""

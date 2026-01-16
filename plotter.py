@@ -18,6 +18,15 @@ class Plot:
         self.ax[index].set_xlabel(betalinger.xlabel)
         self.ax[index].set_ylabel(betalinger.currency)
 
+    def plot(self, betalinger):
+        x = []
+        y = []
+        for betaling in betalinger:
+            x.append(betaling.datestamp)
+            y.append(betaling.utFraKonto)
+
+        self.ax.plot(x, y)
+
     def plotRekke(self, index, betalinger):
         self.checkInInfexOutOuBounds(index)
         x = []

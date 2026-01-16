@@ -1,11 +1,7 @@
-from lagBetalingsliste import *
-from betalingsSorterer import *
-from slaaSammen import *
-from exceldokument import *
-from plotter import *
-from tagManager import *
-
 import os
+import screens
+from tagManager import basicTagManager
+from lagBetalingsliste import lagListeAvBetalinger
 
 # Kodesnutt som sjekker hvor mappen med betalinger ligger. Den ligger forskjellig sted på laptop enn pc
 inputmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//NTNU//Økonomi//Betalinger" 
@@ -20,15 +16,12 @@ tagmanager = basicTagManager()
 betalinger = lagListeAvBetalinger(inputmappe, tagmanager)
 utskriftsmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//GitHub//Betalinger//Output"
 
-def func():
-    pass
-
-def funct2():
+def do_nothing(b):
     pass
 
 options = {
-    "Delete all": func(),
-    "Not delete all": funct2()
+    "Ukentlig": screens.weekly_b_year,
+    "Ingenting": do_nothing
 }
 
 while True:
@@ -43,13 +36,13 @@ while True:
             answer = int(input(""))
             break
         except:
-            print("Must input number")
+            print("Må gi et tall")
             continue
 
     c = 0
     for option, funct in options.items():
         if c == answer:
-            print(f"Running funtion {option}")
+            funct(betalinger)
         c += 1
     if c == answer:
         print("Exiting application")

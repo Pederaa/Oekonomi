@@ -1,10 +1,3 @@
-import numpy as np
-import pandas as pd
-from datetime import datetime as dt
-
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-
 from lagBetalingsliste import *
 from betalingsSorterer import *
 from slaaSammen import *
@@ -12,21 +5,17 @@ from exceldokument import *
 from plotter import *
 from tagManager import *
 
-from Betalinger_class import Betalinger
-
 import os
 
-inputmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//NTNU//Økonomi//Betalinger" #PC 
+# Kodesnutt som sjekker hvor mappen med betalinger ligger. Den ligger forskjellig sted på laptop enn pc
+inputmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//NTNU//Økonomi//Betalinger" 
 if not os.path.isdir(inputmappe):
-    inputmappe = "C://Users//Peder//OneDrive - NTNU//Dokumenter//GitHub//Betalinger" #Laptop
-
+    inputmappe = "C://Users//Peder//OneDrive - NTNU//Dokumenter//GitHub//Betalinger" 
     if not os.path.isdir(inputmappe):
         raise FileExistsError(f"Ingen mappe funnet: {inputmappe}")
 
-# inputmappe = "C://Users//Peder//OneDrive - NTNU//Dokumenter//GitHub//Betalinger" #Laptop
 
 print("Program started")
-
 tagmanager = basicTagManager()
 betalinger = lagListeAvBetalinger(inputmappe, tagmanager)
 utskriftsmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//GitHub//Betalinger//Output"

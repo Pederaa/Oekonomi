@@ -1,7 +1,4 @@
-import Betalinger_class
 import pandas as pd
-from datetime import datetime as dt
-from itertools import zip_longest
 import numpy as np
 
 import os

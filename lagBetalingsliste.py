@@ -3,9 +3,7 @@ import pandas as pd
 import os
 
 from Betalinger_class import *
-
 from tagManager import *
-
 
 def lagListeAvBetalinger(foldernavn, tagmanager):
     print("Henter betalinger fra: " + foldernavn)

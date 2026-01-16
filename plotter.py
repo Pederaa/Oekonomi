@@ -1,8 +1,4 @@
 import matplotlib.pyplot as plt
-import Betalinger_class
-from matplotlib.dates import DateFormatter
-import datetime
-
 from betalingsSorterer import *
 
 

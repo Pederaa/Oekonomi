@@ -22,7 +22,38 @@ betalinger = lagListeAvBetalinger(inputmappe) # Ordner betalingene (egen class) 
 
 utskriftsmappe = "C://Users//Peder//OneDrive - NTNU//Dokumenter//GitHub//Betalinger//Output"
 
-betalinger = kunTag(betalinger, ["Handlevarer"])
+def func():
+    pass
+
+def funct2():
+    pass
+
+options = {
+    "Delete all": func(),
+    "Not delete all": funct2()
+}
+
+while True:
+    c = 0
+    for option in options.keys():
+        print(f"{c}: {option}")
+        c += 1
+    
+    while True:
+        try:
+            answer = int(input(""))
+            break
+        except:
+            print("Must input number")
+            continue
+
+    c = 0
+    for option, funct in options:
+        if c == answer:
+            print(f"Running funtion {option}")
+            break
+
+betalinger = fjernTager(betalinger, ["Handlevarer"])
 ukentligeBetalinger = slaaSammenUker(betalinger)
 
 dok = excelDokument(betalinger)

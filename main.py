@@ -17,7 +17,10 @@ betalinger = lagListeAvBetalinger(inputmappe, tagmanager)
 utskriftsmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//GitHub//Betalinger//Output"
 
 options = {
-    "Ukentlig": screens.weekly_b_year,
+    "Ukentlig": screens.weekly,
+    "Ingen tag": screens.ingentag,
+    "Handlevarer": screens.handlevarer,
+    "Reise": screens.reise
 }
 
 while True:

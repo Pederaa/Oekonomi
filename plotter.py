@@ -1,9 +1,12 @@
 import matplotlib.pyplot as plt
 from betalingsSorterer import *
+import datetime as dt
+from Betalinger_class import Betaling
 
+from operator import attrgetter
 
 class Plot:
-    def __init__(self, numberOfPlots):
+    def __init__(self, numberOfPlots=1):
         self.fig, self.ax = plt.subplots(numberOfPlots)
         self.numberOfPlots = numberOfPlots
     
@@ -12,9 +15,12 @@ class Plot:
             raise IndexError
     
     def show(self): plt.show()
+
+    def plotlinefortoday(self, now, ymax : int):
+        plt.vlines(x=now, ymin=0, ymax=ymax, linestyles="dotted", color="Black")
     
-    def addTitle(self, betalinger, index=False):
-        if index == False:
+    def addTitle(self, betalinger, index=None):
+        if index == None:
             self.ax.set_title(betalinger.tittel)
             self.ax.set_xlabel(betalinger.xlabel)
             self.ax.set_ylabel(betalinger.currency)
@@ -24,29 +30,32 @@ class Plot:
         self.ax[index].set_xlabel(betalinger.xlabel)
         self.ax[index].set_ylabel(betalinger.currency)
 
-    def plotLinjeDiagram(self, betalinger, index=False):
+    def plotLinjeDiagram(self, betalinger, index=None):
         x = []
         y = []
-        if index == False:
-            for betaling in betalinger:
-                x.append(betaling.datestamp)
-                y.append(betaling.utFraKonto)
+        if index == None:
+            for bet in betalinger:
+                x.append(bet.datestamp)
+                y.append(bet.utFraKonto)
 
-            self.ax[index].plot(x, y)
-            self.addTitle(index, betalinger)
+            self.ax.plot(x, y)
+            self.addTitle(betalinger, index=index)
+            self.plotlinefortoday(dt.datetime.now(), max(betalinger, key=attrgetter('utFraKonto')).utFraKonto)
             return
 
         self.checkInInfexOutOuBounds(index)
-        for betaling in betalinger:
-            x.append(betaling.datestamp)
-            y.append(betaling.utFraKonto)
+        for bet in betalinger:
+            x.append(bet.datestamp)
+            y.append(bet.utFraKonto)
         self.ax[index].plot(x, y)
-        self.addTitle(index, betalinger)
+        self.addTitle(betalinger, index=index)
 
     # Todo: endre på denne
+    """
     def plottSector(self, index, betalinger, tagmanager):
         self.checkInInfexOutOuBounds(index)
-        betalingerEtterTag = sorterBetalingerEtterTags(betalinger)
+        tagmanager = basicTagManager()
+        betalingerEtterTag = sorterBetalingerEtterTags(betalinger, tagmanager)
 
         tager = list(tagmanager.getTags())
 
@@ -61,4 +70,5 @@ class Plot:
             sums.append(betalingerEtterTag[tag].sum()[0])
         
         self.ax[index].pie(sums, labels=tagerAaPlotte)
-        self.addTitle(index, betalinger)
+        self.addTitle(betalinger, index=index)
+        """

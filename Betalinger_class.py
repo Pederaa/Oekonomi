@@ -28,7 +28,7 @@ class Betaling():
 
     def __hash__(self):
         return hash((self.datestamp, self.currency, self.forklaring, self.utFraKonto, self.innPaaKonto))
-    
+
     def tonpArray(self, columns):
         row = np.empty(len(columns), dtype=object)
         for j in range(len(columns)):

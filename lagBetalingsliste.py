@@ -10,9 +10,9 @@ def lagListeAvBetalinger(foldernavn, tagmanager):
     kombinertListeAvBetalinger = Betalinger()
     for filename in os.listdir(foldernavn):
         if filename.endswith('.xlsx') or filename.endswith('.xls'):
-            filename = os.path.join(foldernavn, filename)
+            path = os.path.join(foldernavn, filename)
             print("\t Henter fil: " + filename)
-            betalinger = pd.read_excel(filename)
+            betalinger = pd.read_excel(path)
 
             betalinger["Inn på konto"] = betalinger["Inn på konto"].fillna(0)
             betalinger["Ut fra konto"] = betalinger["Ut fra konto"].fillna(0)
@@ -30,4 +30,7 @@ def lagListeAvBetalinger(foldernavn, tagmanager):
     kombinertListeAvBetalinger.sorts()
 
     print("Betalinger fra " + foldernavn + " ferdig hentet.")
+    print()
+    print()
+    
     return kombinertListeAvBetalinger

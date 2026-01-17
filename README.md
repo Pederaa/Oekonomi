@@ -1,6 +1,7 @@
 # Automatisk Økonomianalyse
 Hensikten med dette prosjektet er å lage et program som kan hente inn og analysere kontoutskriften min og fremstille betalinger jeg har gjort på en oversiktlig måte. Målet er å bruke denne koden til å bli mer bevist på egen pengebruk og ta bedre økonomiske valg. 
 
+
 ## TODO
 - [ ] Endre exceldokument til å lage sheets med dictionaries isteden. 
 - [ ] Legg til flere kwargs i exceldokumentet
@@ -9,6 +10,7 @@ Hensikten med dette prosjektet er å lage et program som kan hente inn og analys
 - [ ] Defiener inn fjernAlleFør og fjernAlleEtter- funksjonene
 - [ ] Finn en bedre måte å implementere tagmanager på
 - [ ] Lag init-tester for koden
+
 
 ## Klasser
 ### Betaling(self, datestamp, forklaring, utFraKonto, innPaaKonto)
@@ -28,6 +30,7 @@ Inheriter fra list. Lager et liste av betalinger sortert etter betalingstidspunk
 - fjernAlleEtter(self, timestamp): Fjern alle betalinger fra før timestampen
 - getÅr(self, år):
 
+
 ## excelDokument(self, betalinger_)
 Et instans av et excel-dokument som skal skrive betalinger-lista ut osm en fin excel-fil. Funksjoner:
 - lagSheet(self, betalinger): Lager et 2d np-array av betalinger. Returnerer arrayet
@@ -39,8 +42,11 @@ Plotter betalingene i fine plots matplotlib. Den tar inn et argument for hvor ma
 - checkInInfexOutOuBounds(self, index): Sjekker om indeksen som gis er større enn antal plots
 - show(self): Viser plottet
 - addTitles(self, indeks, betalinger): Setter aksene til plotet til det betalingen har selv. 
-- plotRekke(self, index, betalinger): plotter en tidsgraf med utbeløp langs y-aksen. Kaller automatisk checkInInfexOutOuBounds og addTitles. 
+- PlotTidsDiagram(self, betalinger, index=False): plotter en tidsgraf med utbeløp langs y-aksen. Dersom det er en indeks, prøver den å plotte over den. Kaller automatisk checkInInfexOutOuBounds og addTitles. 
 - plottSector(self, index, betalinger): Skiller betalinger etter tager og plotter dem i sektordiagram opp mot hverandre. 
+
+## Screen-dokumentet
+Ikke en klasse, men hører til her allikevel. Her er alle funksjonene som kan kalles av brukeren. Alle måtene å se på, sortere og visualisere dataen på som brukeren har tilgang til
 
 
 ## Tag(self, name, keyPhrases)
@@ -54,12 +60,15 @@ Inheriter fra list. Lager en liste med tags som kan itereres over for å sjekke 
 - containsName(self, tagname): Sjekker om en string av en tag er i taglista. Returnerer true eller false. 
 - containsNameList(self, tagnameList): Sjekker om en av tagene i en liste er i taglista. 
 
+
 ## basicTagManager(self)
 Inheriter fra Tags. Inneholder alle tagsene som identifiserer kjøpene mine. Er i teorien mulig å lage flere tagmanagers, men jeg bruker bare denne. 
+
 
 ## Andre ekstra funkjsoner
 ### Dict-funksjonene 
 Noen ganger er det hensiktsmessig å dele en betalingsliste etter egenskaper. Det har vært tre egenskaper jeg har vært interessert i: måned, år og tags (mer om de senere). Alle funksjonene returner en dict med egenskapen som nøkkel.
+
 
 ### lagListeAvBetalinger(foldernavn)
 Tar inn en folder og finner alle exceldokumenter der. Den slår sammen alle betalingslistene til en en enkelt betalingsliste, sletter alle like elementer med "set" og sorterer lista. Den returnerer en lista. 

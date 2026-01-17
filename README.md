@@ -2,14 +2,13 @@
 Hensikten med dette prosjektet er å lage et program som kan hente inn og analysere kontoutskriften min og fremstille betalinger jeg har gjort på en oversiktlig måte. Målet er å bruke denne koden til å bli mer bevist på egen pengebruk og ta bedre økonomiske valg. 
 
 ## TODO
-- [ ] Verifiser at koden faktisk fungerer
 - [ ] Endre exceldokument til å lage sheets med dictionaries isteden. 
 - [ ] Legg til flere kwargs i exceldokumentet
 - [ ] Gjør indeksene til plotteren til en kwarg for lesbarhet
 - [ ] Gjør flere av de frie funksjonene om til klassefunksjoner
 - [ ] Defiener inn fjernAlleFør og fjernAlleEtter- funksjonene
 - [ ] Finn en bedre måte å implementere tagmanager på
-- [ ] Lag funksjoner som kan teste koden
+- [ ] Lag init-tester for koden
 
 ## Klasser
 ### Betaling(self, datestamp, forklaring, utFraKonto, innPaaKonto)

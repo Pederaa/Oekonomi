@@ -13,30 +13,35 @@ class Plot:
     
     def show(self): plt.show()
     
-    def addTitles(self, index, betalinger):
+    def addTitle(self, betalinger, index=False):
+        if index == False:
+            self.ax.set_title(betalinger.tittel)
+            self.ax.set_xlabel(betalinger.xlabel)
+            self.ax.set_ylabel(betalinger.currency)
+            return
+
         self.ax[index].set_title(betalinger.tittel)
         self.ax[index].set_xlabel(betalinger.xlabel)
         self.ax[index].set_ylabel(betalinger.currency)
 
-    def plot(self, betalinger):
+    def plotLinjeDiagram(self, betalinger, index=False):
         x = []
         y = []
-        for betaling in betalinger:
-            x.append(betaling.datestamp)
-            y.append(betaling.utFraKonto)
+        if index == False:
+            for betaling in betalinger:
+                x.append(betaling.datestamp)
+                y.append(betaling.utFraKonto)
 
-        self.ax.plot(x, y)
+            self.ax[index].plot(x, y)
+            self.addTitle(index, betalinger)
+            return
 
-    def plotRekke(self, index, betalinger):
         self.checkInInfexOutOuBounds(index)
-        x = []
-        y = []
         for betaling in betalinger:
             x.append(betaling.datestamp)
             y.append(betaling.utFraKonto)
-
         self.ax[index].plot(x, y)
-        self.addTitles(index, betalinger)
+        self.addTitle(index, betalinger)
 
     # Todo: endre på denne
     def plottSector(self, index, betalinger, tagmanager):
@@ -56,4 +61,4 @@ class Plot:
             sums.append(betalingerEtterTag[tag].sum()[0])
         
         self.ax[index].pie(sums, labels=tagerAaPlotte)
-        self.addTitles(index, betalinger)
+        self.addTitle(index, betalinger)

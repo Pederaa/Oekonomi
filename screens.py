@@ -10,5 +10,5 @@ def weekly_b_year(betalinger):
     ukentligeBetalinger.tittel = "Ukentlige betalinger år for år"
 
     plot = Plot(1)
-    plot.plot(ukentligeBetalinger)
+    plot.plotLinjeDiagram(ukentligeBetalinger)
     plot.show()

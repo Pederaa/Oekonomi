@@ -11,17 +11,13 @@ if not os.path.isdir(inputmappe):
         raise FileExistsError(f"Ingen mappe funnet: {inputmappe}")
 
 
-print("Program started")
+print("Program startet")
 tagmanager = basicTagManager()
 betalinger = lagListeAvBetalinger(inputmappe, tagmanager)
 utskriftsmappe = "C://Users//Peder Aa. Hoff//OneDrive - NTNU//Dokumenter//GitHub//Betalinger//Output"
 
-def do_nothing(b):
-    pass
-
 options = {
     "Ukentlig": screens.weekly_b_year,
-    "Ingenting": do_nothing
 }
 
 while True:
@@ -45,28 +41,9 @@ while True:
             funct(betalinger)
         c += 1
     if c == answer:
-        print("Exiting application")
+        print("Slutter kode")
         break
 
     print()
     print()
     print()
-
-"""
-betalinger = fjernTager(betalinger, ["Handlevarer"])
-ukentligeBetalinger = slaaSammenUker(betalinger)
-dagligebetalinger = slaaSammenDager(betalinger)
-
-betalinger.tittel = "Vanlige betalinger"
-ukentligeBetalinger.tittel = "Ukentlige betalinger"
-dagligebetalinger.tittel = "Daglige betalinger"
-
-plot = Plot(3)
-plot.plotRekke(0, betalinger)
-plot.plotRekke(2, ukentligeBetalinger)
-plot.plotRekke(1, dagligebetalinger)
-
-plot.show()
-
-print("Program Complete")
-"""

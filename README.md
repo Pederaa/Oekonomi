@@ -9,7 +9,7 @@ Hensikten med dette prosjektet er å lage et program som kan hente inn og analys
 - [ ] Gjør flere av de frie funksjonene om til klassefunksjoner
 - [ ] Defiener inn fjernAlleFør og fjernAlleEtter- funksjonene
 - [ ] Finn en bedre måte å implementere tagmanager på
-- [ ] Lag init-tester for koden
+- [ ] Lag unit-tester for koden
 
 
 ## Klasser

@@ -91,3 +91,19 @@ class Betalinger(list):
     def getÅr(self, år):
         self.fjernAllefør(dt(år, 1, 1))
         self.fjernAlleEtter(dt(år, 12, 31))
+    
+    def turnToLists(self):
+        times = []
+        utgifter = []
+
+        for betaling in self:
+            times.append(betaling.datestamp)
+            utgifter.append(betaling.utFraKonto)
+
+        return times, utgifter
+
+
+class betDict(dict):
+    tittel = ""
+    currensy = ""
+    xlabel = ""

@@ -24,7 +24,7 @@ def sorterEtterAar(betalinger):
             aar_dict[betelings_maaned] = Betalinger()
         aar_dict[betelings_maaned].append(betaling)
 
-    aar_dict = dict(reversed(list(aar_dict.items())))
+    aar_dict = betDict(reversed(list(aar_dict.items())))
     return aar_dict
 
 

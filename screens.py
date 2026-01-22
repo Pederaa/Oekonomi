@@ -17,10 +17,14 @@ def ingentag(betalinger):
     tagmanager = basicTagManager()
 
     annet_betalinger = kunTag(betalinger, ["Annet"], tagmanager)
-    annet_betalinger.tittel = "Ukjente betalinger"
+    
+
+    betalingeretterår = sorterEtterAar(annet_betalinger)
+    betalingeretterår.tittel = "Ukjente betalinger"
 
     plot = Plot()
-    plot.plotLinjeDiagram(annet_betalinger)
+    print(betalingeretterår)
+    plot.plotLinjeDiagram(betalingeretterår)
     plot.show()
 
 def handlevarer(betalinger):

@@ -14,7 +14,9 @@ class Plot:
         if(index >= self.numberOfPlots):
             raise IndexError
     
-    def show(self): plt.show()
+    def show(self): 
+        plt.legend()
+        plt.show()
 
     def plotlinefortoday(self, now, ymax : int):
         plt.vlines(x=now, ymin=0, ymax=ymax, linestyles="dotted", color="Black")
@@ -31,23 +33,31 @@ class Plot:
         self.ax[index].set_ylabel(betalinger.currency)
 
     def plotLinjeDiagram(self, betalinger, index=None):
-        x = []
-        y = []
-        if index == None:
-            for bet in betalinger:
-                x.append(bet.datestamp)
-                y.append(bet.utFraKonto)
+        if type(betalinger) == type(betDict()):
+            for aar, bet in betalinger.items():
+                t, y = bet.turnToLists()
 
-            self.ax.plot(x, y)
+                self.addTitle(bet, index=index)
+                self.plotlinefortoday(dt.datetime.now(), max(bet, key=attrgetter('utFraKonto')).utFraKonto)
+
+                if index == None:
+                    self.ax.plot(t, y, label=aar)
+                    continue
+
+                self.checkInInfexOutOuBounds(index)
+                self.ax[index].plot(t, y)
+                self.addTitle(betalinger, index=index)
+            return
+
+        t, y = betalinger.turnToLists()
+        if index == None:
+            self.ax.plot(t, y)
             self.addTitle(betalinger, index=index)
             self.plotlinefortoday(dt.datetime.now(), max(betalinger, key=attrgetter('utFraKonto')).utFraKonto)
             return
 
         self.checkInInfexOutOuBounds(index)
-        for bet in betalinger:
-            x.append(bet.datestamp)
-            y.append(bet.utFraKonto)
-        self.ax[index].plot(x, y)
+        self.ax[index].plot(t, y)
         self.addTitle(betalinger, index=index)
 
     # Todo: endre på denne
